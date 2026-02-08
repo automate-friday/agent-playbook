@@ -308,3 +308,30 @@ Before starting any task, check:
 ---
 
 *Generated from Jacob's Discord messages on 2026-02-08 across #aut-275-test-specs and #general. This document should be treated as a living reference for agent training and DNA files.*
+
+---
+
+## 9. Live Example: Foundation-First in Practice (2026-02-08 ~18:23–19:24 UTC)
+
+The AUT-275 test specs sprint is a textbook example of Jacob's coaching working in real time.
+
+**What went wrong first:**
+- Op wrote 11 test files (158 assertions) before proving Vitest ran in CI
+- Tesla posted PR reviews in Discord instead of GitHub
+- 3 agents dumped into one channel simultaneously
+- Nobody verified their access before starting
+- Jacob had to push the loop forward himself
+
+**What happened after Jacob coached:**
+- Stripped PR down to `expect(true).toBe(true)` + `expect(true).toBe(false)`
+- Proved the plumbing: both visible in CI, green and red
+- Then layered up one test at a time:
+  - Layer 0: Vitest runs ✅
+  - Layer 1: 1Password secrets load into CI ✅ (failed first → clear error message → fixed `export-env` → green)
+  - Layer 2: Hetzner API reachable with valid token ✅
+  - Layer 3: Tailscale (in progress)
+- Each layer took ~5 minutes. No debates. No scope creep. One test, prove it, move on.
+
+**The contrast is stark.** Before coaching: 3 hours of debate, 11 files, no working CI. After coaching: 4 passing layers in ~30 minutes, each building on proven foundations.
+
+**Key takeaway:** The "boring" approach (one test at a time, prove the plumbing) is dramatically faster than the "ambitious" approach (write everything, hope it works). Foundation-first isn't slower — it's the only thing that's fast.
